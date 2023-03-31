@@ -35,14 +35,14 @@ export default function MyTabs() {
         name="Search" 
         component={SearchScreen} 
         options={{
-          tabBarLabel: 'Feed',
+          tabBarLabel: 'Search',
           tabBarIcon: ({color, size})=>(
             <FontAwesome name="search" size={24} color={color} />
           ), 
         }}/>
 
       <Tab.Screen 
-        name="Profile" 
+        name="Perfil " 
         component={ProfileScreen} 
         options={{
           tabBarLabel: 'Feed',
@@ -53,11 +53,3 @@ export default function MyTabs() {
     </Tab.Navigator>
   );
 }
-
-// export default function App() {
-//   return (
-//     <NavigationContainer>
-//       <MyTabs />
-//     </NavigationContainer>
-//   );
-// }
