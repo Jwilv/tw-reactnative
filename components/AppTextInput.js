@@ -8,7 +8,7 @@ import {
   import React, { useState } from "react";
   
   export default function AppTextInput({ ...otherProps }) {
-    const [focused, setFocused] = useState<boolean>(false);
+    const [focused, setFocused] = useState(false);
     return (
       <TextInput
         onFocus={() => setFocused(true)}
