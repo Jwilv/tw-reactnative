@@ -13,7 +13,7 @@ import ProfileScreen from "../screens/ProfileScreen";
 
 const Tab = createBottomTabNavigator();
 
-export default function MyTabs() {
+export default function Navigation() {
   return (
     <Tab.Navigator
       initialRouteName='Home'
