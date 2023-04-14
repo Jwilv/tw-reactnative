@@ -38,9 +38,10 @@ import {
           </View>
           <View
             style={{
-              marginVertical: 10,
+              marginVertical: -10,
             }}
           >
+            <AppTextInput placeholder="Name" />
             <AppTextInput placeholder="Email" />
             <AppTextInput placeholder="Password" />
             <AppTextInput placeholder="Confirm Password" />
