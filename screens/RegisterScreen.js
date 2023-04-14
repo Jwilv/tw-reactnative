@@ -17,7 +17,7 @@ import {
       <SafeAreaView>
         <View
           style={{
-            padding: 20,
+            padding: 10,
           }}
         >
           <View
@@ -34,19 +34,11 @@ import {
             >
               Create account
             </Text>
-            <Text
-              style={{
-                fontSize: 14,
-                maxWidth: "80%",
-                textAlign: "center",
-              }}
-            >
-              Create an account so you can explore all the existing jobs
-            </Text>
+            
           </View>
           <View
             style={{
-              marginVertical: 30,
+              marginVertical: 10,
             }}
           >
             <AppTextInput placeholder="Email" />
@@ -80,10 +72,7 @@ import {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigate("Login")}
-            style={{
-              padding: 10,
-            }}
+            onPress={() => {navigation.navigate('Login')}}
           >
             <Text
               style={{
@@ -95,73 +84,6 @@ import {
               Already have an account
             </Text>
           </TouchableOpacity>
-  
-          <View
-            style={{
-              marginVertical: 10,
-            }}
-          >
-            <Text
-              style={{
-                color: '#1F41BB',
-                textAlign: "center",
-                fontSize: 14,
-              }}
-            >
-              Or continue with
-            </Text>
-  
-            <View
-              style={{
-                marginTop: 10,
-                flexDirection: "row",
-                justifyContent: "center",
-              }}
-            >
-              <TouchableOpacity
-                style={{
-                  padding: 10,
-                  backgroundColor: '#ECECEC',
-                  borderRadius: 5,
-                  marginHorizontal: 10,
-                }}
-              >
-                <Ionicons
-                  name="logo-google"
-                  color={'#000'}
-                  size={20}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  padding: 10,
-                  backgroundColor: '#ECECEC',
-                  borderRadius: 5,
-                  marginHorizontal: 10,
-                }}
-              >
-                <Ionicons
-                  name="logo-apple"
-                  color={'#ECECEC'}
-                  size={20}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  padding: 20,
-                  backgroundColor: '#ECECEC',
-                  borderRadius: 5,
-                  marginHorizontal: 10,
-                }}
-              >
-                <Ionicons
-                  name="logo-facebook"
-                  color={'#000'}
-                  size={20}
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
         </View>
       </SafeAreaView>
     );
