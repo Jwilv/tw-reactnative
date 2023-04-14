@@ -60,7 +60,7 @@ export default function WelcomeScreen({navigation}) {
             }}
           >
             <TouchableOpacity
-              onPress={() => navigate("Login")}
+              onPress={() => {navigation.navigate('Login')}}
               style={{
                 backgroundColor: 'blue',
                 paddingVertical: 15,
@@ -87,7 +87,7 @@ export default function WelcomeScreen({navigation}) {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => navigate("Register")}
+              onPress={() => {navigation.navigate('Register')}}
               style={{
                 paddingVertical: 15,
                 paddingHorizontal: 20,
