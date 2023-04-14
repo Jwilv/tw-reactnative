@@ -7,9 +7,9 @@ import { FontAwesome } from '@expo/vector-icons';
 
 
 // //screens
-import HomeScreen from "../screens/HomeScreen";
-import SearchScreen from "../screens/SearchScreen";
-import ProfileScreen from "../screens/ProfileScreen";
+import HomeScreen from "./HomeScreen";
+import SearchScreen from "./SearchScreen";
+import ProfileScreen from "./ProfileScreen";
 
 const Tab = createBottomTabNavigator();
 

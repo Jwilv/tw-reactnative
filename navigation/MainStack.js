@@ -6,6 +6,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import  WelcomeScreen  from "../screens/WelcomeScreen";
 import  RegisterScreen  from "../screens/RegisterScreen";
 import LoginScreen from '../screens/LoginScreen';
+import Navigation from '../screens/Navigation';
 
 
 
@@ -29,6 +30,10 @@ export default function MainStack() {
         <Stack.Screen
           name='Login'
           component={LoginScreen}
+        />
+        <Stack.Screen
+          name='Hom'
+          component={Navigation}
         />
 
       </Stack.Navigator>
