@@ -1,6 +1,46 @@
-import React from 'react';
-import { StyleSheet, Text, View, Image, ScrollView} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity } from 'react-native';
 
+const HomeScreen = () => {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    fetch('https://randomuser.me/api/?results=20')
+      .then(response => response.json())
+      .then(data => {
+        setUsers(data.results);
+      });
+  }, []);
+
+  const renderPost = ({ item }) => {
+    return (   
+      <TouchableOpacity onPress={() => console.log(item)}>
+
+<View style={styles.linea}></View>
+    <View  style={styles.contenedor}>
+      <Image
+        style={styles.Logo}
+        source={{ uri: item.picture.medium }}
+      />
+      <View>
+        <Text style={styles.nombre}>{`${item.name.first} ${item.name.last}`}</Text>
+        <Text style={styles.publicacion}>Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem Ipsum es que tie.</Text>
+      </View>
+    </View>
+      </TouchableOpacity>
+    );
+  };
+
+  return (
+    <View style={styles.container}>
+      <FlatList
+        data={users}
+        renderItem={renderPost}
+        keyExtractor={(item, index) => index.toString()}
+      />
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   Logo: {
@@ -29,25 +69,4 @@ const styles = StyleSheet.create({
   }
 });
 
-
-export default function HomeScreen() {
-  return (
-    <>
-    <ScrollView>
-    <View style={styles.linea}></View>
-    <View  style={styles.contenedor}>
-      <Image
-        style={styles.Logo}
-        source={{
-          uri: 'https://reactnative.dev/img/tiny_logo.png',
-        }}
-      />
-      <View>
-        <Text style={styles.nombre}>Matias Rolon</Text>
-        <Text style={styles.publicacion}>Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem Ipsum es que tiene una distribución más o menos normal de las letras, al contrario de usar textos como por ejemplo "Contenido aquí, contenido aquí". Estos textos hacen parecerlo un español que se puede leer. Muchos paquetes de autoedición y editores de páginas web usan el Lorem Ipsum como su texto por defecto, y al hacer una búsqueda de "Lorem Ipsum" va a dar por resultado muchos sitios web que usan este texto si se encuentran en estado de desarrollo. Muchas versiones han evolucionado a través de los años, algunas veces por accidente, otras veces a propósito (por ejemplo insertándole humor y cosas por el estilo).Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem Ipsum es que tiene una distribución más o menos normal de las letras, al contrario de usar textos como por ejemplo "Contenido aquí, contenido aquí". Estos textos hacen parecerlo un español que se puede leer. Muchos paquetes de autoedición y editores de páginas web usan el Lorem Ipsum como su texto por defecto, y al hacer una búsqueda de "Lorem Ipsum" va a dar por resultado muchos sitios web que usan este texto si se encuentran en estado de desarrollo. Muchas versiones han evolucionado a través de los años, algunas veces por accidente, otras veces a propósito (por ejemplo insertándole humor y cosas por el estilo).</Text>
-      </View>
-    </View>
-    </ScrollView>
-    </>
-  );
-}
+export default HomeScreen;
