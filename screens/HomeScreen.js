@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity } from 'react-native';
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -12,21 +12,27 @@ const HomeScreen = () => {
       });
   }, []);
 
-  const renderPost = ({ item }) => {
-    return (   
-      <TouchableOpacity onPress={() => console.log(item)}>
+  const handlePostPress = id => {
+    const user = users.find(item => item.id === id);
+    console.log('Post pressed:', user);
+    // Navigate to the user's profile screen
+    navigation.navigate('ProfileUser', {user: user});
+  };
 
-<View style={styles.linea}></View>
-    <View  style={styles.contenedor}>
-      <Image
-        style={styles.Logo}
-        source={{ uri: item.picture.medium }}
-      />
-      <View>
-        <Text style={styles.nombre}>{`${item.name.first} ${item.name.last}`}</Text>
-        <Text style={styles.publicacion}>Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem Ipsum es que tie.</Text>
-      </View>
-    </View>
+  const renderPost = ({ item }) => {
+    return (
+      <TouchableOpacity onPress={() => handlePostPress(item.id)}>
+        <View style={styles.linea}></View>
+        <View style={styles.contenedor}>
+          <Image
+            style={styles.Logo}
+            source={{ uri: item.picture.medium }}
+          />
+          <View>
+            <Text style={styles.nombre}>{`${item.name.first} ${item.name.last}`}</Text>
+            <Text style={styles.publicacion}>Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem Ipsum es que tie.</Text>
+          </View>
+        </View>
       </TouchableOpacity>
     );
   };
@@ -49,21 +55,21 @@ const styles = StyleSheet.create({
     borderRadius: 100,
 
   },
-  contenedor:{
-    padding:10,
+  contenedor: {
+    padding: 10,
     flexDirection: 'row',
   },
-  linea:{
-    backgroundColor:'#B1B1B1',
-    width:'100%',
+  linea: {
+    backgroundColor: '#B1B1B1',
+    width: '100%',
     height: 1,
   },
-  nombre:{
+  nombre: {
     fontSize: 15,
     fontWeight: 'bold',
     marginLeft: 10,
   },
-  publicacion:{
+  publicacion: {
     marginLeft: 10,
     marginRight: 45,
   }

@@ -7,6 +7,7 @@ import  WelcomeScreen  from "../screens/WelcomeScreen";
 import  RegisterScreen  from "../screens/RegisterScreen";
 import LoginScreen from '../screens/LoginScreen';
 import Navigation from '../screens/Navigation';
+import ProfileUserScreen from '../screens/ProfileUserScreen';
 
 
 
@@ -34,6 +35,10 @@ export default function MainStack() {
         <Stack.Screen
           name='Hom'
           component={Navigation}
+        />
+        <Stack.Screen
+          name='ProfileUser'
+          component={ProfileUserScreen}
         />
 
       </Stack.Navigator>
