@@ -20,7 +20,7 @@ export const verifyToken = () => {
         console.log( "salio bien")
         return !status
     } catch (error) {
-        console.log("salio mal")
+        console.log("mal salio")
         return false
     }
 

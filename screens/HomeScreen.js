@@ -14,7 +14,6 @@ const HomeScreen = ({navigation}) => {
 
   const handlePostPress = id => {
     const user = users.find(item => item.id === id);
-    // Navigate to the user's profile screen
     navigation.navigate('ProfileUser', {user: user});
     console.log("seleccionado");
   };

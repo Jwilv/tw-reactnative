@@ -98,7 +98,7 @@ export default function SearchScreen({navigation}) {
         <ScrollView>
           {filteredData.map((item, index) => {
             return (
-              <TouchableOpacity onPress={() => handlePostPress(item.id)}>
+              <TouchableOpacity key={index} onPress={() => handlePostPress(item.id)}>
               <View key={index} style={styles.itemContainer}>
                 <Image
                   source={{ uri: item.picture.large }}

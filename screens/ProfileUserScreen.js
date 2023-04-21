@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 const styles = StyleSheet.create({
     banner: {
@@ -46,9 +47,17 @@ const styles = StyleSheet.create({
     },
 });
 
-export default function ProfileUserScreen({route}) {
+export default function ProfileUserScreen({ route }) {
     const { user } = route.params;
 
+    const navigation = useNavigation();
+
+    React.useLayoutEffect(() => {
+        navigation.setOptions({
+            headerShown: true,
+            title: user.name.first + ' ' + user.name.last,
+        });
+    }, [navigation]);
 
     return (
         <View>

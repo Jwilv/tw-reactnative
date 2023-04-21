@@ -18,7 +18,8 @@ export default function MainStack() {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{
-          headerShown: false
+          headerShown: false,
+          headerBackTitleVisible: true
         }}>
         <Stack.Screen
           name='Welcome'
