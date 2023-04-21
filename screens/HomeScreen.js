@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity } from 'react-native';
 
-const HomeScreen = ({navigation}) => {
+const HomeScreen = ({ navigation }) => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
@@ -14,26 +14,26 @@ const HomeScreen = ({navigation}) => {
 
   const handlePostPress = id => {
     const user = users.find(item => item.id === id);
-    navigation.navigate('ProfileUser', {user: user});
+    navigation.navigate('ProfileUser', { user: user });
     console.log("seleccionado");
   };
 
   const renderPost = ({ item }) => {
     return (
       <>
-      <View style={styles.linea}></View>
-      <TouchableOpacity onPress={() => handlePostPress(item.id)}>
-        <View style={styles.contenedor}>
-          <Image
-            style={styles.Logo}
-            source={{ uri: item.picture.medium }}
-          />
-          <View>
-            <Text style={styles.nombre}>{`${item.name.first} ${item.name.last}`}</Text>
-            <Text style={styles.publicacion}>Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem Ipsum es que tie.</Text>
+        <View style={styles.linea}></View>
+        <TouchableOpacity onPress={() => handlePostPress(item.id)}>
+          <View style={styles.contenedor}>
+            <Image
+              style={styles.Logo}
+              source={{ uri: item.picture.medium }}
+            />
+            <View>
+              <Text style={styles.nombre}>{`${item.name.first} ${item.name.last}`}</Text>
+              <Text style={styles.publicacion}>Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem Ipsum es que tie.</Text>
+            </View>
           </View>
-        </View>
-      </TouchableOpacity>
+        </TouchableOpacity>
       </>
     );
   };
@@ -45,6 +45,13 @@ const HomeScreen = ({navigation}) => {
         renderItem={renderPost}
         keyExtractor={(item, index) => index.toString()}
       />
+      <TouchableOpacity
+        style={styles.floatingButton}
+        onPress={() => console.log('Botón flotante presionado')}
+      >
+        <Text style={styles.buttonText}>+</Text>
+      </TouchableOpacity>
+
     </View>
   );
 };
@@ -73,7 +80,23 @@ const styles = StyleSheet.create({
   publicacion: {
     marginLeft: 10,
     marginRight: 45,
-  }
+  },
+  floatingButton: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    width: 50,
+    height: 50,
+    backgroundColor: '#1DA1F2',
+    borderRadius: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 3,
+  },
+  buttonText: {
+    fontSize: 30,
+    color: 'white',
+  },
 });
 
 export default HomeScreen;
