@@ -14,15 +14,16 @@ const HomeScreen = ({navigation}) => {
 
   const handlePostPress = id => {
     const user = users.find(item => item.id === id);
-    console.log('Post pressed:', user);
     // Navigate to the user's profile screen
     navigation.navigate('ProfileUser', {user: user});
+    console.log("seleccionado");
   };
 
   const renderPost = ({ item }) => {
     return (
+      <>
+      <View style={styles.linea}></View>
       <TouchableOpacity onPress={() => handlePostPress(item.id)}>
-        <View style={styles.linea}></View>
         <View style={styles.contenedor}>
           <Image
             style={styles.Logo}
@@ -34,6 +35,7 @@ const HomeScreen = ({navigation}) => {
           </View>
         </View>
       </TouchableOpacity>
+      </>
     );
   };
 

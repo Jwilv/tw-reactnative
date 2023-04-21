@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, Text, View, TextInput, Image } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { useState } from 'react';
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 
 const styles = StyleSheet.create({
   textFriends: {
@@ -47,9 +46,9 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function SearchScreen() {
+export default function SearchScreen({navigation}) {
 
-  const [data, setData] = useState([]);
+  const [users, setUsers] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
@@ -61,7 +60,7 @@ export default function SearchScreen() {
       const response = await fetch(url);
       const json = await response.json();
       const { results } = json;
-      setData(results);
+      setUsers(results);
       console.log(results);
     } catch (error) {
       console.log(error);
@@ -70,12 +69,21 @@ export default function SearchScreen() {
     }
   };
 
-  const filteredData = data.filter(
+  const filteredData = users.filter(
     (item) =>
       item.name.first.toLowerCase().includes(searchTerm.toLowerCase()) ||
       item.name.last.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const handlePostPress = id => {
+    const user = users.find(item => item.id === id);
+    // Navigate to the user's profile screen
+    navigation.navigate('ProfileUser', {user: user});
+  };
+
+  
+
+  
   return (
     <>
       <View>
@@ -88,9 +96,9 @@ export default function SearchScreen() {
           />
         </View>
         <ScrollView>
-          <Text style={styles.textFriends}>Friend</Text>
           {filteredData.map((item, index) => {
             return (
+              <TouchableOpacity onPress={() => handlePostPress(item.id)}>
               <View key={index} style={styles.itemContainer}>
                 <Image
                   source={{ uri: item.picture.large }}
@@ -103,6 +111,7 @@ export default function SearchScreen() {
                   <Text style={styles.textEmail}>{item.login.username}</Text>
                 </View>
               </View>
+              </TouchableOpacity>
             );
           })}
         </ScrollView>
