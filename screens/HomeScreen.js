@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, Button, TextInput } from 'react-native';
+import Modal from "react-native-modal";
 
 const HomeScreen = ({ navigation }) => {
   const [users, setUsers] = useState([]);
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
 
   useEffect(() => {
     fetch('https://randomuser.me/api/?results=20')
@@ -47,11 +53,30 @@ const HomeScreen = ({ navigation }) => {
       />
       <TouchableOpacity
         style={styles.floatingButton}
-        onPress={() => console.log('Botón flotante presionado')}
+        onPress={toggleModal}
       >
         <Text style={styles.buttonText}>+</Text>
       </TouchableOpacity>
-
+      <View style={{ flex: 1 }}>
+        <Modal isVisible={isModalVisible}>
+          <View style={{ backgroundColor: '#FFFF', paddingVertical: 20, paddingHorizontal: 20, borderRadius: 6 }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Image style={{ width: 50, height: 50, borderRadius: 100 }} source={{ uri: 'https://cdn.pixabay.com/photo/2016/08/03/09/04/universe-1566161_640.jpg' }} />
+              <Text style={{ marginLeft: 10, alignSelf: 'center' }}>Matias Rolon</Text>
+              <View style={{ flex: 1 }}></View>
+              <View style={{ position: 'absolute', top: -5, right: 1 }}>
+                <TouchableOpacity onPress={toggleModal}>
+                  <Text style={{ color: '#272727', fontSize: 20 }}>x</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+            <TextInput style={{ paddingBottom: 50, marginTop: 10 }} multiline={true} placeholder="¿En que estas pensando?" />
+            <TouchableOpacity style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#1DA1F2', paddingVertical: 10, borderRadius: 9, elevation: 2 }}>
+              <Text style={{ color: 'white' }}>Enviar</Text>
+            </TouchableOpacity>
+          </View>
+        </Modal>
+      </View>
     </View>
   );
 };
@@ -61,6 +86,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 100,
+    display: 'flex',
 
   },
   contenedor: {
@@ -97,6 +123,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: 'white',
   },
+
 });
 
 export default HomeScreen;
