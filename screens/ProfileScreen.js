@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const styles = StyleSheet.create({
   banner:{
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function ProfileScreen() {
+export default function ProfileScreen({navigation}) {
   return (
     <View>
             <ScrollView>
@@ -63,6 +64,11 @@ export default function ProfileScreen() {
             uri: 'https://reactnative.dev/img/tiny_logo.png',
           }}
         />
+         <View style={{ position: 'absolute', top: 10, right: 15 }}>
+        <TouchableOpacity onPress={() => {navigation.navigate('EditProfile')}}>
+          <MaterialCommunityIcons name="account-edit" size={28} color="black" />
+        </TouchableOpacity>
+        </View>
       </View>
       <Text style={styles.nombre}>Lionel Fulbo Andres</Text>
       <Text style={styles.descripcion}>Soy un pibe que le gusta el fulbo, incha del barcelona y de river plate (el mas grande que hay)</Text>

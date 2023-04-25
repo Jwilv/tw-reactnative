@@ -9,6 +9,8 @@ import LoginScreen from '../screens/LoginScreen';
 import Navigation from '../screens/Navigation';
 import ProfileUserScreen from '../screens/ProfileUserScreen';
 import Publication from '../screens/Publication';
+import EditProfileScreen from '../screens/EditProfileScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 
 
 
@@ -45,6 +47,14 @@ export default function MainStack() {
         <Stack.Screen
           name='Publication'
           component={Publication}
+        />
+        <Stack.Screen
+          name='EditProfile'
+          component={EditProfileScreen}
+        />
+        <Stack.Screen
+          name='Profile'
+          component={ProfileScreen}
         />
 
       </Stack.Navigator>
