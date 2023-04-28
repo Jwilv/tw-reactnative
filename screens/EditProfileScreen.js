@@ -17,7 +17,7 @@ export default function EditProfileScreen({ route }) {
             title: 'Editar perfil',
             headerRight: () => (
                 <TouchableOpacity onPress={() => { navigation.navigate('Profile') }}><MaterialCommunityIcons name="check" size={24} color={isDarkMode ?  'blue' : '#1DA1F2'} /></TouchableOpacity>
-            ),
+            ), 
         });
     }, [navigation]);
 
