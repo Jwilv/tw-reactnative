@@ -86,7 +86,7 @@ const HomeScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  //Theme light
+  //Light theme
   Logo: {
     width: 50,
     height: 50,
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: 'white',
   },
-  //Theme dark
+  //Dark theme
   contenedorDark: {
     padding: 10,
     flexDirection: 'row',
