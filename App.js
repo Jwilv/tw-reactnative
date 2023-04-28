@@ -13,5 +13,5 @@ export default function App() {
     //   <Navigation></Navigation>
     // </NavigationContainer>
     <MainStack/>
-  );
+      );
 }

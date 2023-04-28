@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { TouchableOpacity } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons'; 
+import { Ionicons } from '@expo/vector-icons';
 
 
 // //screens
@@ -23,13 +23,16 @@ export default function Navigation() {
       <Tab.Screen 
         name="Home" 
         component={HomeScreen} 
-        options={{
-          tabBarLabel: 'Feed',
+        options={({ navigation }) => ({
+          tabBarLabel: 'Home',
           tabBarIcon: ({color, size})=>(
             <MaterialCommunityIcons name="home" size={24} color={color} />
-          ), 
-        }}
-        />
+          ),
+          headerRight: () => (
+            <TouchableOpacity style={{ marginRight: 8}}><Ionicons name="ios-moon" size={24} color="black" /></TouchableOpacity>
+          ),
+        })}
+      />
 
       <Tab.Screen 
         name="Search" 
@@ -45,7 +48,7 @@ export default function Navigation() {
         name="Perfil " 
         component={ProfileScreen} 
         options={{
-          tabBarLabel: 'Feed',
+          tabBarLabel: 'Profile',
           tabBarIcon: ({color, size})=>(
             <MaterialCommunityIcons name="account" size={24} color={color} />
           ), 

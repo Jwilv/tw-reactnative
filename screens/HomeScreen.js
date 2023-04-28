@@ -1,17 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, Switch, TextInput } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, TextInput } from 'react-native';
 import Modal from "react-native-modal";
-import { Ionicons } from '@expo/vector-icons';
-
-
 
 const HomeScreen = ({ navigation }) => {
-  navigation.setOptions({
-    headerRight: () => (
-      <TouchableOpacity style={styles.themes}><Ionicons name="ios-moon" size={24} color="black" /></TouchableOpacity>
-    ),
-});
-  
+
   const [users, setUsers] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
 
@@ -54,7 +46,7 @@ const HomeScreen = ({ navigation }) => {
   };
 
   return (
-    
+
     <View style={styles.container}>
       <FlatList
         data={users}
