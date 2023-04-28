@@ -3,24 +3,26 @@ import * as React from 'react';
 import { Text, View, StyleSheet, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function EditProfileScreen({ route }) {
-
+    const { isDarkMode } = useSelector(state => state.themeMode);
     const navigation = useNavigation();
 
     React.useLayoutEffect(() => {
         navigation.setOptions({
+            headerStyle: { backgroundColor: isDarkMode ? 'white' : '#0D141B' },
+            headerTintColor : isDarkMode ? 'black' : 'white',
             headerShown: true,
             title: 'Editar perfil',
             headerRight: () => (
-                <TouchableOpacity onPress={() => {navigation.navigate('Profile')}}><MaterialCommunityIcons name="check" size={24} color="black" /></TouchableOpacity>
-              ),
+                <TouchableOpacity onPress={() => { navigation.navigate('Profile') }}><MaterialCommunityIcons name="check" size={24} color={isDarkMode ?  'blue' : '#1DA1F2'} /></TouchableOpacity>
+            ),
         });
     }, [navigation]);
-    
+
     return (
-        <View>
+        <View style={isDarkMode ? styles.contenedor : styles.contenedorDark}>
             <ScrollView>
                 <Image
                     style={styles.banner}
@@ -43,11 +45,11 @@ export default function EditProfileScreen({ route }) {
                     </TouchableOpacity>
                 </View>
                 <View style={{ paddingHorizontal: 20 }}>
-                    <Text>Nombre de usuario</Text>
-                    <TextInput>Matias Rolon</TextInput>
+                    <Text style={isDarkMode ? {color:'black'} : {color:'white'}}>Nombre de usuario</Text>
+                    <TextInput style={isDarkMode ? {color:'black'} : {color:'white'}}>Matias Rolon</TextInput>
                     <View style={styles.linea}></View>
-                    <Text>Descripcion</Text>
-                    <TextInput>Soy un pibe que le gusta el fulbo, incha del barcelona y de river plate (el mas grande que hay)</TextInput>
+                    <Text style={isDarkMode ? {color:'black'} : {color:'white'}}>Descripcion</Text>
+                    <TextInput style={isDarkMode ? {color:'black'} : {color:'white'}}>Soy un pibe que le gusta el fulbo, incha del barcelona y de river plate (el mas grande que hay)</TextInput>
                     <View style={styles.linea}></View>
                 </View>
             </ScrollView>
@@ -56,6 +58,59 @@ export default function EditProfileScreen({ route }) {
 }
 
 const styles = StyleSheet.create({
+    //Light theme
+    contenedor:{
+        backgroundColor:'white', 
+        height:'100%'
+    },
+    banner: {
+        height: 150,
+    },
+    Logo: {
+        width: 50,
+        height: 50,
+        borderRadius: 100,
+
+    },
+    LogoPerfil: {
+        width: 100,
+        height: 100,
+        borderRadius: 100,
+        marginTop: -50,
+    },
+    contenedorLogo: {
+        marginLeft: 10,
+        marginBottom: 10,
+    },
+    linea: {
+        backgroundColor: '#B1B1B1',
+        width: '100%',
+        height: 1,
+        marginBottom: 15,
+    },
+    editLogo: {
+        position: 'absolute',
+        backgroundColor: 'rgba(0, 0, 0, 0.4)',
+        width: 100,
+        height: 100,
+        borderRadius: 100,
+        marginTop: -50,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    editBanner: {
+        position: 'absolute',
+        backgroundColor: 'rgba(0, 0, 0, 0.4)',
+        height: 150,
+        width: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    //Dark theme
+    contenedorDark:{
+        backgroundColor:'#131F2B', 
+        height:'100%'
+    },
     banner: {
         height: 150,
     },
