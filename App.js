@@ -4,6 +4,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import MainStack from "./navigation/MainStack";
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
 
 export default function App() {
   return (
@@ -12,6 +14,8 @@ export default function App() {
      
     //   <Navigation></Navigation>
     // </NavigationContainer>
+    <Provider store={store}>
     <MainStack/>
+    </Provider>
       );
 }

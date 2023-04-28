@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, TextInput } from 'react-native';
 import Modal from "react-native-modal";
+import { useDispatch, useSelector } from 'react-redux';
 
 const HomeScreen = ({ navigation }) => {
 
   const [users, setUsers] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
+  const {isDarkMode} = useSelector( state => state.themeMode);
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -28,16 +30,16 @@ const HomeScreen = ({ navigation }) => {
   const renderPost = ({ item }) => {
     return (
       <>
-        <View style={styles.linea}></View>
+        
         <TouchableOpacity onPress={() => handlePostPress(item.id)}>
-          <View style={styles.contenedor}>
+          <View style={ isDarkMode ? styles.contenedor : styles.contenedorDark}>
             <Image
               style={styles.Logo}
               source={{ uri: item.picture.medium }}
             />
             <View>
-              <Text style={styles.nombre}>{`${item.name.first} ${item.name.last}`}</Text>
-              <Text style={styles.publicacion}>Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem Ipsum es que tie.</Text>
+              <Text style={ isDarkMode ? styles.nombre : styles.nombreDark}>{`${item.name.first} ${item.name.last}`}</Text>
+              <Text style={isDarkMode ? styles.publicacion :styles.publicacionDark}>Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem Ipsum es que tie.</Text>
             </View>
           </View>
         </TouchableOpacity>
@@ -47,7 +49,7 @@ const HomeScreen = ({ navigation }) => {
 
   return (
 
-    <View style={styles.container}>
+    <View>
       <FlatList
         data={users}
         renderItem={renderPost}
@@ -84,6 +86,7 @@ const HomeScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+  //Theme light
   Logo: {
     width: 50,
     height: 50,
@@ -115,7 +118,8 @@ const styles = StyleSheet.create({
     right: 20,
     width: 50,
     height: 50,
-    backgroundColor: '#1DA1F2',
+    backgroundColor:'#1DA1F2',
+
     borderRadius: 100,
     alignItems: 'center',
     justifyContent: 'center',
@@ -125,10 +129,45 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: 'white',
   },
-  themes: {
-    marginRight: 8,
-  }
+  //Theme dark
+  contenedorDark: {
+    padding: 10,
+    flexDirection: 'row',
+    backgroundColor: '#131F2B'
+  },
+  lineaDark: {
+    backgroundColor: '#2F3336',
+    width: '100%',
+    height: 1,
+  },
+  nombreDark: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    marginLeft: 10,
+    color: 'white'
+  },
+  publicacionDark: {
+    marginLeft: 10,
+    marginRight: 45,
+    color: 'white'
+  },
+  floatingButtonDark: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    width: 50,
+    height: 50,
+    backgroundColor:'#1DA1F2',
 
+    borderRadius: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 3,
+  },
+  buttonTextDark: {
+    fontSize: 30,
+    color: 'white',
+  },
 });
 
 export default HomeScreen;

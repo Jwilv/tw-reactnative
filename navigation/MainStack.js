@@ -22,7 +22,7 @@ export default function MainStack() {
       <Stack.Navigator
         screenOptions={{
           headerShown: false,
-          headerBackTitleVisible: true
+          headerBackTitleVisible: true,
         }}>
         <Stack.Screen
           name='Welcome'
