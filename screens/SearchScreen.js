@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
-import { StyleSheet, Text, View, TextInput, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Image } from 'react-native';
 import { useState } from 'react';
+import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 
 const styles = StyleSheet.create({
   textFriends: {
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function SearchScreen({navigation}) {
+export default function SearchScreen() {
 
   const [users, setUsers] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -81,9 +82,6 @@ export default function SearchScreen({navigation}) {
     navigation.navigate('ProfileUser', {user: user});
   };
 
-  
-
-  
   return (
     <>
       <View>
@@ -98,7 +96,6 @@ export default function SearchScreen({navigation}) {
         <ScrollView>
           {filteredData.map((item, index) => {
             return (
-              <TouchableOpacity key={index} onPress={() => handlePostPress(item.id)}>
               <View key={index} style={styles.itemContainer}>
                 <Image
                   source={{ uri: item.picture.large }}
@@ -111,7 +108,6 @@ export default function SearchScreen({navigation}) {
                   <Text style={styles.textEmail}>{item.login.username}</Text>
                 </View>
               </View>
-              </TouchableOpacity>
             );
           })}
         </ScrollView>

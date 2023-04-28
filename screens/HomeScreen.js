@@ -63,18 +63,18 @@ const HomeScreen = ({ navigation }) => {
       </TouchableOpacity>
       <View style={{ flex: 1 }}>
         <Modal isVisible={isModalVisible}>
-          <View style={{ backgroundColor: '#FFFF', paddingVertical: 20, paddingHorizontal: 20, borderRadius: 6 }}>
+          <View style={{ backgroundColor: isDarkMode ? '#FFFF' : '#131F2B', paddingVertical: 20, paddingHorizontal: 20, borderRadius: 6 }}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Image style={{ width: 50, height: 50, borderRadius: 100 }} source={{ uri: 'https://cdn.pixabay.com/photo/2016/08/03/09/04/universe-1566161_640.jpg' }} />
-              <Text style={{ marginLeft: 10, alignSelf: 'center' }}>Matias Rolon</Text>
+              <Text style={{ color: isDarkMode ? 'black':'white' , marginLeft: 10, alignSelf: 'center' }}>Matias Rolon</Text>
               <View style={{ flex: 1 }}></View>
               <View style={{ position: 'absolute', top: -5, right: 1 }}>
                 <TouchableOpacity onPress={toggleModal}>
-                  <Text style={{ color: '#272727', fontSize: 20 }}>x</Text>
+                  <Text style={{ color: isDarkMode ? 'black':'white', fontSize: 20 }}>x</Text>
                 </TouchableOpacity>
               </View>
             </View>
-            <TextInput style={{ paddingBottom: 50, marginTop: 10 }} multiline={true} placeholder="¿En que estas pensando?" />
+            <TextInput style={{ color: isDarkMode ? 'black':'white', paddingBottom: 50, marginTop: 10}} multiline={true} placeholder="¿En que estas pensando?" placeholderTextColor= "gray"/>
             <TouchableOpacity style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#1DA1F2', paddingVertical: 10, borderRadius: 9, elevation: 2 }}>
               <Text style={{ color: 'white' }}>Enviar</Text>
             </TouchableOpacity>
