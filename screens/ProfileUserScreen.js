@@ -11,15 +11,15 @@ export default function ProfileUserScreen({ route }) {
 
     React.useLayoutEffect(() => {
         navigation.setOptions({
-            headerStyle: { backgroundColor: isDarkMode ? 'white' : '#0D141B' },
-            headerTintColor : isDarkMode ? 'black' : 'white',
+            headerStyle: { backgroundColor: isDarkMode ? '#0D141B' : 'white' },
+            headerTintColor : isDarkMode ? 'white' : 'black',
             headerShown: true,
             title: user.name.first + ' ' + user.name.last,
         });
     }, [navigation]);
 
     return (
-        <View style={isDarkMode ? styles.contenedor : styles.contenedorDark}>
+        <View style={isDarkMode ? styles.contenedorDark : styles.contenedor}>
             <ScrollView>
                 <Image
                     style={styles.banner}
@@ -31,8 +31,8 @@ export default function ProfileUserScreen({ route }) {
                         source={{ uri: user.picture.medium }}
                     />
                 </View>
-                <Text style={isDarkMode ? styles.nombre : styles.nombreDark}>{user.name.first} {user.name.last}</Text>
-                <Text style={isDarkMode ? styles.descripcion : styles.descripcionDark}>Soy un pibe que le gusta el fulbo, incha del barcelona y de river plate (el mas grande que hay)</Text>
+                <Text style={isDarkMode ? styles.nombreDark : styles.nombre}>{user.name.first} {user.name.last}</Text>
+                <Text style={isDarkMode ? styles.descripcionDark : styles.descripcion}>Soy un pibe que le gusta el fulbo, incha del barcelona y de river plate (el mas grande que hay)</Text>
 
                 <View style={styles.contenedorPublicacion}>
 
@@ -41,8 +41,8 @@ export default function ProfileUserScreen({ route }) {
                         source={{ uri: user.picture.medium }}
                     />
                     <View>
-                        <Text style={isDarkMode ? styles.nombre : styles.nombreDark}>{user.name.first} {user.name.last}</Text>
-                        <Text style={isDarkMode ? styles.publicacion : styles.publicacionDark}>Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem Ipsum es que tiene una distribución más o menos normal de las letras, al contrario de usar textos como por ejemplo "Contenido aquí, contenido aquí". Estos textos hacen parecerlo un español que se puede leer. Muchos paquetes de autoedición y editores de páginas web usan el Lorem Ipsum como su texto por defecto, y al hacer una búsqueda de "Lorem Ipsum" va a dar por resultado muchos sitios web que usan este texto si se encuentran en estado de desarrollo. Muchas versiones han evolucionado a través de los años, algunas veces por accidente, otras veces a propósito (por ejemplo insertándole humor y cosas por el estilo).Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem Ipsum es que tiene una distribución más o menos normal de las letras, al contrario de usar textos como por ejemplo "Contenido aquí, contenido aquí". Estos textos hacen parecerlo un español que se puede leer. Muchos paquetes de autoedición y editores de páginas web usan el Lorem Ipsum como su texto por defecto, y al hacer una búsqueda de "Lorem Ipsum" va a dar por resultado muchos sitios web que usan este texto si se encuentran en estado de desarrollo. Muchas versiones han evolucionado a través de los años, algunas veces por accidente, otras veces a propósito (por ejemplo insertándole humor y cosas por el estilo).</Text>
+                        <Text style={isDarkMode ? styles.nombreDark : styles.nombre}>{user.name.first} {user.name.last}</Text>
+                        <Text style={isDarkMode ? styles.publicacionDark : styles.publicacion}>Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem Ipsum es que tiene una distribución más o menos normal de las letras, al contrario de usar textos como por ejemplo "Contenido aquí, contenido aquí". Estos textos hacen parecerlo un español que se puede leer. Muchos paquetes de autoedición y editores de páginas web usan el Lorem Ipsum como su texto por defecto, y al hacer una búsqueda de "Lorem Ipsum" va a dar por resultado muchos sitios web que usan este texto si se encuentran en estado de desarrollo. Muchas versiones han evolucionado a través de los años, algunas veces por accidente, otras veces a propósito (por ejemplo insertándole humor y cosas por el estilo).Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem Ipsum es que tiene una distribución más o menos normal de las letras, al contrario de usar textos como por ejemplo "Contenido aquí, contenido aquí". Estos textos hacen parecerlo un español que se puede leer. Muchos paquetes de autoedición y editores de páginas web usan el Lorem Ipsum como su texto por defecto, y al hacer una búsqueda de "Lorem Ipsum" va a dar por resultado muchos sitios web que usan este texto si se encuentran en estado de desarrollo. Muchas versiones han evolucionado a través de los años, algunas veces por accidente, otras veces a propósito (por ejemplo insertándole humor y cosas por el estilo).</Text>
                     </View>
                 </View>
             </ScrollView>

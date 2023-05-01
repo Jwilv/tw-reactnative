@@ -42,17 +42,17 @@ export default function SearchScreen({navigation}) {
 
   return (
     <>
-      <View>
-        <View style={isDarkMode ? styles.searchBar: styles.searchBarDark}>
+      <View style={{height: '100%'}}>
+        <View style={isDarkMode ? styles.searchBarDark: styles.searchBar}>
           <TextInput
-            style={isDarkMode ? styles.searchInput : styles.searchInputDark}
+            style={isDarkMode ? styles.searchInputDark : styles.searchInput}
             placeholder="Search"
             value={searchTerm}
             onChangeText={(text) => setSearchTerm(text)}
             placeholderTextColor= "gray"
           />
         </View>
-        <ScrollView style={ isDarkMode ? styles.container : styles.containerDark}>
+        <ScrollView style={ isDarkMode ? styles.containerDark : styles.container}>
           {filteredData.map((item, index) => {
             return (
               <TouchableOpacity key={index} onPress={() => handlePostPress(item.id)}>
@@ -62,7 +62,7 @@ export default function SearchScreen({navigation}) {
                   style={styles.image}
                 />
                 <View>
-                  <Text style={ isDarkMode ? styles.textName : styles.textNameDark}>
+                  <Text style={ isDarkMode ? styles.textNameDark : styles.textName}>
                     {item.name.first} {item.name.last}
                   </Text>
                   <Text style={styles.textEmail}>{item.login.username}</Text>

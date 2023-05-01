@@ -32,14 +32,14 @@ const HomeScreen = ({ navigation }) => {
       <>
         
         <TouchableOpacity onPress={() => handlePostPress(item.id)}>
-          <View style={ isDarkMode ? styles.contenedor : styles.contenedorDark}>
+          <View style={ isDarkMode ? styles.contenedorDark : styles.contenedor}>
             <Image
               style={styles.Logo}
               source={{ uri: item.picture.medium }}
             />
             <View>
-              <Text style={ isDarkMode ? styles.nombre : styles.nombreDark}>{`${item.name.first} ${item.name.last}`}</Text>
-              <Text style={isDarkMode ? styles.publicacion :styles.publicacionDark}>Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem Ipsum es que tie.</Text>
+              <Text style={ isDarkMode ? styles.nombreDark : styles.nombre}>{`${item.name.first} ${item.name.last}`}</Text>
+              <Text style={isDarkMode ? styles.publicacionDark :styles.publicacion}>Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem Ipsum es que tie.</Text>
             </View>
           </View>
         </TouchableOpacity>
@@ -49,7 +49,7 @@ const HomeScreen = ({ navigation }) => {
 
   return (
 
-    <View>
+    <View style={{height:'100%'}}>
       <FlatList
         data={users}
         renderItem={renderPost}
@@ -63,18 +63,18 @@ const HomeScreen = ({ navigation }) => {
       </TouchableOpacity>
       <View style={{ flex: 1 }}>
         <Modal isVisible={isModalVisible}>
-          <View style={{ backgroundColor: isDarkMode ? '#FFFF' : '#131F2B', paddingVertical: 20, paddingHorizontal: 20, borderRadius: 6 }}>
+          <View style={{ backgroundColor: isDarkMode ? '#131F2B' : '#FFFF', paddingVertical: 20, paddingHorizontal: 20, borderRadius: 6 }}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
               <Image style={{ width: 50, height: 50, borderRadius: 100 }} source={{ uri: 'https://cdn.pixabay.com/photo/2016/08/03/09/04/universe-1566161_640.jpg' }} />
-              <Text style={{ color: isDarkMode ? 'black':'white' , marginLeft: 10, alignSelf: 'center' }}>Matias Rolon</Text>
+              <Text style={{ color: isDarkMode ? 'white':'black' , marginLeft: 10, alignSelf: 'center' }}>Matias Rolon</Text>
               <View style={{ flex: 1 }}></View>
               <View style={{ position: 'absolute', top: -5, right: 1 }}>
                 <TouchableOpacity onPress={toggleModal}>
-                  <Text style={{ color: isDarkMode ? 'black':'white', fontSize: 20 }}>x</Text>
+                  <Text style={{ color: isDarkMode ? 'white':'black', fontSize: 20 }}>x</Text>
                 </TouchableOpacity>
               </View>
             </View>
-            <TextInput style={{ color: isDarkMode ? 'black':'white', paddingBottom: 50, marginTop: 10}} multiline={true} placeholder="¿En que estas pensando?" placeholderTextColor= "gray"/>
+            <TextInput style={{ color: isDarkMode ? 'white':'black', paddingBottom: 50, marginTop: 10}} multiline={true} placeholder="¿En que estas pensando?" placeholderTextColor= "gray"/>
             <TouchableOpacity style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#1DA1F2', paddingVertical: 10, borderRadius: 9, elevation: 2 }}>
               <Text style={{ color: 'white' }}>Enviar</Text>
             </TouchableOpacity>

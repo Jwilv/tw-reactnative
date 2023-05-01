@@ -11,18 +11,18 @@ export default function EditProfileScreen({ route }) {
 
     React.useLayoutEffect(() => {
         navigation.setOptions({
-            headerStyle: { backgroundColor: isDarkMode ? 'white' : '#0D141B' },
-            headerTintColor : isDarkMode ? 'black' : 'white',
+            headerStyle: { backgroundColor: isDarkMode ? '#0D141B' : 'white' },
+            headerTintColor : isDarkMode ? 'white' : 'black',
             headerShown: true,
             title: 'Editar perfil',
             headerRight: () => (
-                <TouchableOpacity onPress={() => { navigation.navigate('Profile') }}><MaterialCommunityIcons name="check" size={24} color={isDarkMode ?  'blue' : '#1DA1F2'} /></TouchableOpacity>
+                <TouchableOpacity onPress={() => { navigation.navigate('Profile') }}><MaterialCommunityIcons name="check" size={24} color={isDarkMode ?  '#1DA1F2' : 'blue'} /></TouchableOpacity>
             ), 
         });
     }, [navigation]);
 
     return (
-        <View style={isDarkMode ? styles.contenedor : styles.contenedorDark}>
+        <View style={isDarkMode ? styles.contenedorDark : styles.contenedor}>
             <ScrollView>
                 <Image
                     style={styles.banner}
@@ -45,11 +45,11 @@ export default function EditProfileScreen({ route }) {
                     </TouchableOpacity>
                 </View>
                 <View style={{ paddingHorizontal: 20 }}>
-                    <Text style={isDarkMode ? {color:'black'} : {color:'white'}}>Nombre de usuario</Text>
-                    <TextInput style={isDarkMode ? {color:'black'} : {color:'white'}}>Matias Rolon</TextInput>
+                    <Text style={isDarkMode ? {color:'white'} : {color:'black'}}>Nombre de usuario</Text>
+                    <TextInput style={isDarkMode ? {color:'white'} : {color:'black'}}>Matias Rolon</TextInput>
                     <View style={styles.linea}></View>
-                    <Text style={isDarkMode ? {color:'black'} : {color:'white'}}>Descripcion</Text>
-                    <TextInput style={isDarkMode ? {color:'black'} : {color:'white'}}>Soy un pibe que le gusta el fulbo, incha del barcelona y de river plate (el mas grande que hay)</TextInput>
+                    <Text style={isDarkMode ? {color:'white'} : {color:'black'}}>Descripcion</Text>
+                    <TextInput style={isDarkMode ? {color:'white'} : {color:'black'}}>Soy un pibe que le gusta el fulbo, incha del barcelona y de river plate (el mas grande que hay)</TextInput>
                     <View style={styles.linea}></View>
                 </View>
             </ScrollView>

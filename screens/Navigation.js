@@ -27,13 +27,14 @@ const handleDark = ()=>{
 }
 
   return (
+    
     <Tab.Navigator
       initialRouteName='Home'
       screenOptions={{
-        tabBarActiveTintColor:isDarkMode ?  'blue' : '#1DA1F2',
-        tabBarStyle: { backgroundColor: isDarkMode ? 'white' : '#0D141B' },
-        headerStyle: { backgroundColor: isDarkMode ? 'white' : '#0D141B' },
-        headerTintColor : isDarkMode ? 'black' : 'white',
+        tabBarActiveTintColor:isDarkMode ?  '#1DA1F2' : 'blue',
+        tabBarStyle: { backgroundColor: isDarkMode ? '#0D141B' : 'white' },
+        headerStyle: { backgroundColor: isDarkMode ? '#0D141B' : 'white' },
+        headerTintColor : isDarkMode ? 'white' : 'black',
       }}>
       <Tab.Screen 
         name="Home" 
@@ -41,10 +42,10 @@ const handleDark = ()=>{
         options={({ navigation }) => ({
           tabBarLabel: 'Home',
           tabBarIcon: ({color, size})=>(
-            <MaterialCommunityIcons isDarkMode name="home" size={24} color={color} />
+            <MaterialCommunityIcons name="home" size={24} color={color} />
           ),
           headerRight: () => (
-            <TouchableOpacity style={{ marginRight: 8}} onPress={handleDark}><Ionicons name={isDarkMode ? "ios-moon" : "sunny"} size={24} color={isDarkMode ? "black" : "white"} /></TouchableOpacity>
+            <TouchableOpacity style={{ marginRight: 8}} onPress={handleDark}><Ionicons name={isDarkMode ? "sunny" : "ios-moon"} size={24} color={isDarkMode ? "white" : "black"} /></TouchableOpacity>
           ),
         })}
       />
