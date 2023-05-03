@@ -31,7 +31,7 @@ const HomeScreen = ({ navigation }) => {
     return (
       <>
         
-        <TouchableOpacity onPress={() => handlePostPress(item.id)}>
+        <TouchableOpacity activeOpacity={1} onPress={() => handlePostPress(item.id)}>
           <View style={ isDarkMode ? styles.contenedorDark : styles.contenedor}>
             <Image
               style={styles.Logo}
