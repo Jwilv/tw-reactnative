@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchToken, fetchWithoToken } from "../helpers/fecht";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const initialState = {
     name: "",
     uid: "",
     checking: true,
-    looged: false,
+    logged: false,
 }
-
 
 const authSlice = createSlice({
     name: "auth",
@@ -20,11 +20,10 @@ const authSlice = createSlice({
                 ...action.payload,
             }
         },
-
         logout: (state) => {
             return {
                 checking: false,
-                looged: false,
+                logged: false,
             }
         },
         checkingFinish: (state) => {
@@ -42,10 +41,10 @@ export const startLogin = ({ email, password }) => {
     return async (dispatch) => {
         try {
             const { token } = await fetchWithoToken('login', { email, password }, 'POST')
-            localStorage.setItem('token', token)
+            await AsyncStorage.setItem('token', token)
             dispatch(login({
                 checking: false,
-                looged: true,
+                logged: true,
             }))
             return true
         } catch (error) {
@@ -59,10 +58,10 @@ export const startRegister = (data) => {
     return async (dispatch) => {
         try {
             const { token } = await fetchWithoToken('register', data, 'POST')
-            localStorage.setItem('token', token)
+            await AsyncStorage.setItem('token', token)
             dispatch(login({
                 checking: false,
-                looged: true,
+                logged: true,
             }))
             return true
         } catch (error) {
@@ -76,11 +75,12 @@ export const startRenew = () => {
     return async (dispatch) => {
         try {
             const { token } = await fetchToken('renew')
-            localStorage.setItem('token', token)
+            await AsyncStorage.setItem('token', token)
             dispatch(login({
                 checking: false,
-                looged: true,
+                logged: true,
             }))
+            console.log("buenasa")
             return true
         } catch (error) {
             console.log(error)
@@ -94,7 +94,7 @@ export const startRenew = () => {
 
 export const startLogout = () => {
     return async (dispatch) => {
-        localStorage.removeItem("token")
+        await AsyncStorage.removeItem("token")
         dispatch(logout())
     }
 }
