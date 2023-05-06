@@ -38,10 +38,12 @@ const authSlice = createSlice({
 const { login, logout, checkingFinish } = authSlice.actions;
 
 export const startLogin = ({ email, password }) => {
+    console.log(email , password)
     return async (dispatch) => {
         try {
             const { token } = await fetchWithoToken('login', { email, password }, 'POST')
             await AsyncStorage.setItem('token', token)
+            console.log(token + 'hola');
             dispatch(login({
                 checking: false,
                 logged: true,
@@ -49,6 +51,7 @@ export const startLogin = ({ email, password }) => {
             return true
         } catch (error) {
             console.log("malio sal")
+            console.log({error});
             return false
         }
     }
