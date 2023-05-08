@@ -42,8 +42,9 @@ export const startLogin = ({ email, password }) => {
     return async (dispatch) => {
         try {
             const { token } = await fetchWithoToken('login', { email, password }, 'POST')
-            await AsyncStorage.setItem('token', token)
-            console.log(token + 'hola');
+            await AsyncStorage.setItem('token', token);
+            const storedToken = await AsyncStorage.getItem('token');
+            console.log(storedToken);
             dispatch(login({
                 checking: false,
                 logged: true,
