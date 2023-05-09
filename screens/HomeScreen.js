@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, TextInput } from 'react-native';
 import Modal from "react-native-modal";
 import { useDispatch, useSelector } from 'react-redux';
+import { getUidAndName } from "../helpers/getUidAndName";
 
 const HomeScreen = ({ navigation }) => {
 

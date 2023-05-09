@@ -10,7 +10,7 @@ import React from "react";
 import { useForm } from "../hooks/useForm";
 import { useDispatch } from "react-redux";
 import { startLogin } from "../redux/auth.slice";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getUidAndName } from "../helpers/getUidAndName";
 
 
 export default function LoginScreen({ navigation }) {
@@ -24,10 +24,12 @@ export default function LoginScreen({ navigation }) {
   const { email, password } = values
   console.log(values)
   const handleSubmit = () => {
-
+    
     const data = { email, password }
-
+    console.log(getUidAndName());
     dispatch(startLogin(data))
+
+    navigation.navigate('Hom')
 
   }
 
