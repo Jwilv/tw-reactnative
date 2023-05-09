@@ -10,11 +10,17 @@ import React from "react";
 import { useForm } from "../hooks/useForm";
 import { useDispatch } from "react-redux";
 import { startLogin } from "../redux/auth.slice";
+import { startUserData } from "../redux/user.slice";
 import { getUidAndName } from "../helpers/getUidAndName";
 
 
 export default function LoginScreen({ navigation }) {
+
+
   const dispatch = useDispatch()
+
+
+
 
   const initialState = {
     email: "test.com",
@@ -24,11 +30,11 @@ export default function LoginScreen({ navigation }) {
   const { email, password } = values
   console.log(values)
   const handleSubmit = () => {
-    
-    const data = { email, password }
-    console.log(getUidAndName());
-    dispatch(startLogin(data))
 
+    const data = { email, password }
+    dispatch(startLogin(data));
+    dispatch(startUserData())
+    console.log("Hola");
     navigation.navigate('Hom')
 
   }

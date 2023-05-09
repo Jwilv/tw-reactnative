@@ -2,9 +2,13 @@ import React from 'react';
 import { StyleSheet, Text, View, Image, ScrollView, TouchableOpacity } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
+import { State } from 'react-native-gesture-handler';
+
 
 
 export default function ProfileScreen({ navigation }) {
+
+  const {_id, name } = useSelector(state => state.user)
   const { isDarkMode } = useSelector(state => state.themeMode);
   return (
     <View style={isDarkMode ? styles.contenedorDark : styles.contenedor}>
