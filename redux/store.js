@@ -10,5 +10,5 @@ export const store = configureStore({
         auth: authReducer,
         themeMode : darkModeReducer,
         user : userReducer,
-    }
+    },
 })

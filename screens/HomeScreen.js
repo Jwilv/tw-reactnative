@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, TextInput } from 'react-native';
 import Modal from "react-native-modal";
-import { useDispatch, useSelector } from 'react-redux';
-import { getUidAndName } from "../helpers/getUidAndName";
+import { useSelector } from 'react-redux';
 
 const HomeScreen = ({ navigation }) => {
 
@@ -25,7 +24,6 @@ const HomeScreen = ({ navigation }) => {
   const handlePostPress = id => {
     const user = users.find(item => item.id === id);
     navigation.navigate('ProfileUser', { user: user });
-    console.log("seleccionado");
   };
 
   const renderPost = ({ item }) => {

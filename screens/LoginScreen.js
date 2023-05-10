@@ -11,7 +11,6 @@ import { useForm } from "../hooks/useForm";
 import { useDispatch } from "react-redux";
 import { startLogin } from "../redux/auth.slice";
 import { startUserData } from "../redux/user.slice";
-import { getUidAndName } from "../helpers/getUidAndName";
 
 
 export default function LoginScreen({ navigation }) {
@@ -28,13 +27,11 @@ export default function LoginScreen({ navigation }) {
   }
   const [values, changeForm, reset] = useForm(initialState)
   const { email, password } = values
-  console.log(values)
   const handleSubmit = () => {
 
     const data = { email, password }
     dispatch(startLogin(data));
     dispatch(startUserData())
-    console.log("Hola");
     navigation.navigate('Hom')
 
   }

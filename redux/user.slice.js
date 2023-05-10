@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { getUidAndName } from "../helpers/getUidAndName";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import jwt_decode from "jwt-decode"
 
 
 const initialState = {
@@ -20,12 +22,15 @@ const userSlice = createSlice({
     }
 })
 
-const {userData} = userSlice.actions ;
+const { userData } = userSlice.actions;
 
-export const startUserData = ()=>{
-    return (dispatch)=>{
-        dispatch(userData(getUidAndName()))
+
+export const startUserData = () => {
+
+    return async (dispatch) => {
+        const uidAndName = await getUidAndName();
+        dispatch(userData(uidAndName));
     }
 }
 
-export default userSlice.reducer ;
+export default userSlice.reducer;

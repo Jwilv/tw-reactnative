@@ -16,14 +16,15 @@ export default function ProfileScreen({ navigation }) {
         <Image
           style={styles.banner}
           source={{
-            uri: 'https://cdn.pixabay.com/photo/2016/08/03/09/04/universe-1566161_640.jpg',
+            uri: `http://192.168.0.111:8080/getBanner?id=${_id}`,
           }}
         />
         <View style={styles.contenedorLogo}>
           <Image
             style={styles.LogoPerfil}
             source={{
-              uri: 'https://reactnative.dev/img/tiny_logo.png',
+              uri: `http://192.168.0.111:8080/getAvatar?id=${_id}`,
+
             }}
           />
           <View style={{ position: 'absolute', top: 10, right: 15 }}>
