@@ -11,6 +11,9 @@ import { useForm } from "../hooks/useForm";
 import { useDispatch } from "react-redux";
 import { startLogin } from "../redux/auth.slice";
 import { startUserData } from "../redux/user.slice";
+import { startDataProfile } from "../redux/profile.slice";
+import { startUploadUserNotes } from "../redux/notes.slice";
+import { getUidAndName } from "../helpers/getUidAndName";
 
 
 export default function LoginScreen({ navigation }) {
@@ -27,11 +30,13 @@ export default function LoginScreen({ navigation }) {
   }
   const [values, changeForm, reset] = useForm(initialState)
   const { email, password } = values
-  const handleSubmit = () => {
-
+  const handleSubmit = async () => {
+    const {_id} = await getUidAndName();
     const data = { email, password }
     dispatch(startLogin(data));
     dispatch(startUserData())
+    dispatch(startDataProfile(_id))
+    dispatch(startUploadUserNotes(_id,1))
     navigation.navigate('Hom')
 
   }

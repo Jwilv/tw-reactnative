@@ -6,7 +6,6 @@ export const getUserById = async (id) => {
 
     try {
         const resp = await fetchToken(`getprofile?id=${id}`)
-        console.log(resp)
         return await resp
     } catch (error) {
         console.log(error)

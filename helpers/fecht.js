@@ -1,3 +1,5 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 // const baseUrl = import.meta.env.VITE_APP_URL_API
 const baseUrl = 'http://192.168.0.111:8080'
 
@@ -24,7 +26,7 @@ export const fetchWithoToken = async (endpoint, data, method = "GET") => {
 
 export const fetchToken = async (endpoint, data, method = "GET") => {
     const url = `${baseUrl}/${endpoint}`
-    const token = localStorage.getItem('token')
+    const token = await AsyncStorage.getItem('token');
 
     if (method === "GET") {
         const resp = await fetch(url, {

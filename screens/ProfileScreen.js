@@ -8,8 +8,17 @@ import { State } from 'react-native-gesture-handler';
 
 export default function ProfileScreen({ navigation }) {
 
-  const {_id, name } = useSelector(state => state.user)
+  const {
+    name,
+    surname,
+    biography,
+    location,
+    birthDate,
+  } = useSelector(state => state.ProfileActive);
+
+  const {_id } = useSelector(state => state.user)
   const { isDarkMode } = useSelector(state => state.themeMode);
+  const {userNotes} = useSelector( state => state.notes)
   return (
     <View style={isDarkMode ? styles.contenedorDark : styles.contenedor}>
       <ScrollView>
@@ -33,22 +42,27 @@ export default function ProfileScreen({ navigation }) {
             </TouchableOpacity>
           </View>
         </View>
-        <Text style={isDarkMode ? styles.nombreDark : styles.nombre}>Lionel Fulbo Andres</Text>
-        <Text style={isDarkMode ? styles.descripcionDark : styles.descripcion}>Soy un pibe que le gusta el fulbo, incha del barcelona y de river plate (el mas grande que hay)</Text>
+        <Text style={isDarkMode ? styles.nombreDark : styles.nombre}>{name} {surname}</Text>
+        <Text style={isDarkMode ? styles.descripcionDark : styles.descripcion}>{biography}</Text>
+        <View style={styles.linea}></View>
 
-        <View style={styles.contenedorPublicacion}>
 
+        {userNotes.map((publicacion) => {
+          return (
+        <View style={styles.contenedorPublicacion} key={publicacion._id}>
           <Image
             style={styles.Logo}
             source={{
-              uri: 'https://reactnative.dev/img/tiny_logo.png',
+              uri: `http://192.168.0.111:8080/getAvatar?id=${_id}`,
             }}
           />
           <View>
-            <Text style={isDarkMode ? styles.nombreDark : styles.nombre}>Matias Rolon</Text>
-            <Text style={isDarkMode ? styles.publicacionDark : styles.publicacion}>Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem Ipsum es que tiene una distribución más o menos normal de las letras, al contrario de usar textos como por ejemplo "Contenido aquí, contenido aquí". Estos textos hacen parecerlo un español que se puede leer. Muchos paquetes de autoedición y editores de páginas web usan el Lorem Ipsum como su texto por defecto, y al hacer una búsqueda de "Lorem Ipsum" va a dar por resultado muchos sitios web que usan este texto si se encuentran en estado de desarrollo. Muchas versiones han evolucionado a través de los años, algunas veces por accidente, otras veces a propósito (por ejemplo insertándole humor y cosas por el estilo).Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem Ipsum es que tiene una distribución más o menos normal de las letras, al contrario de usar textos como por ejemplo "Contenido aquí, contenido aquí". Estos textos hacen parecerlo un español que se puede leer. Muchos paquetes de autoedición y editores de páginas web usan el Lorem Ipsum como su texto por defecto, y al hacer una búsqueda de "Lorem Ipsum" va a dar por resultado muchos sitios web que usan este texto si se encuentran en estado de desarrollo. Muchas versiones han evolucionado a través de los años, algunas veces por accidente, otras veces a propósito (por ejemplo insertándole humor y cosas por el estilo).</Text>
+            <Text style={isDarkMode ? styles.nombreDark : styles.nombre}>{name} {surname}</Text>
+            <Text style={isDarkMode ? styles.publicacionDark : styles.publicacion}>{publicacion.message}</Text>
           </View>
         </View>
+         );
+        })}
       </ScrollView>
     </View>
   );
@@ -95,6 +109,13 @@ const styles = StyleSheet.create({
   contenedorPublicacion: {
     padding: 10,
     flexDirection: 'row',
+  },
+  linea:{
+    backgroundColor:'#B1B1B1',
+    width:'100%',
+    height: 1,
+    marginTop: 10,
+    marginBottom: 5,
   },
 
   //Dark theme

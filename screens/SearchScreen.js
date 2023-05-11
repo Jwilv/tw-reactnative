@@ -20,7 +20,6 @@ export default function SearchScreen({navigation}) {
       const json = await response.json();
       const { results } = json;
       setUsers(results);
-      console.log(results);
     } catch (error) {
       console.log(error);
     } finally {
