@@ -17,6 +17,7 @@ import { getUidAndName } from "../helpers/getUidAndName";
 
 
 export default function LoginScreen({ navigation }) {
+  
 
 
   const dispatch = useDispatch()

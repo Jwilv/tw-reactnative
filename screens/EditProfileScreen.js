@@ -1,25 +1,50 @@
 
-import * as React from 'react';
+import React, {useState} from 'react';
 import { Text, View, StyleSheet, Image, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
+import * as ImagePicker from 'expo-image-picker';
 
 export default function EditProfileScreen({ route }) {
+    const {
+        name,
+        surname,
+        biography,
+        location,
+        birthDate,
+    } = useSelector(state => state.ProfileActive);
+    const {_id } = useSelector(state => state.user)
     const { isDarkMode } = useSelector(state => state.themeMode);
     const navigation = useNavigation();
+
+    const [selectedImage, setSelectedImage] = useState(null);
 
     React.useLayoutEffect(() => {
         navigation.setOptions({
             headerStyle: { backgroundColor: isDarkMode ? '#0D141B' : 'white' },
-            headerTintColor : isDarkMode ? 'white' : 'black',
+            headerTintColor: isDarkMode ? 'white' : 'black',
             headerShown: true,
             title: 'Editar perfil',
             headerRight: () => (
-                <TouchableOpacity onPress={() => { navigation.navigate('Profile') }}><MaterialCommunityIcons name="check" size={24} color={isDarkMode ?  '#1DA1F2' : 'blue'} /></TouchableOpacity>
-            ), 
+                <TouchableOpacity onPress={() => { navigation.navigate('Profile') }}><MaterialCommunityIcons name="check" size={24} color={isDarkMode ? '#1DA1F2' : 'blue'} /></TouchableOpacity>
+            ),
         });
     }, [navigation]);
+
+    const OpenImagePickerAsync = async () =>{
+        let permissionResult = await ImagePicker.requestCameraPermissionsAsync()
+
+        if(permissionResult.granted == false){
+            alert('Necesita aceptar los permisos')
+            return
+        }
+        const picker = await ImagePicker.launchImageLibraryAsync()
+        if(picker.cancelled === true){
+            return;
+        }
+        setSelectedImage({localUri: picker.uri})
+    }
 
     return (
         <View style={isDarkMode ? styles.contenedorDark : styles.contenedor}>
@@ -27,17 +52,17 @@ export default function EditProfileScreen({ route }) {
                 <Image
                     style={styles.banner}
                     source={{
-                        uri: 'https://cdn.pixabay.com/photo/2016/08/03/09/04/universe-1566161_640.jpg',
+                        uri: `http://192.168.0.111:8080/getBanner?id=${_id}`,
                     }}
                 />
-                <TouchableOpacity style={styles.editBanner}>
+                <TouchableOpacity style={styles.editBanner} onPress={OpenImagePickerAsync}>
                     <MaterialCommunityIcons name="camera" size={24} color="white" />
                 </TouchableOpacity>
                 <View style={styles.contenedorLogo}>
                     <Image
                         style={styles.LogoPerfil}
                         source={{
-                            uri: 'https://reactnative.dev/img/tiny_logo.png',
+                            uri: `http://192.168.0.111:8080/getAvatar?id=${_id}`,
                         }}
                     />
                     <TouchableOpacity style={styles.editLogo}>
@@ -45,11 +70,11 @@ export default function EditProfileScreen({ route }) {
                     </TouchableOpacity>
                 </View>
                 <View style={{ paddingHorizontal: 20 }}>
-                    <Text style={isDarkMode ? {color:'white'} : {color:'black'}}>Nombre de usuario</Text>
-                    <TextInput style={isDarkMode ? {color:'white'} : {color:'black'}}>Matias Rolon</TextInput>
+                    <Text style={isDarkMode ? { color: 'white' } : { color: 'black' }}>Nombre de usuario</Text>
+                    <TextInput style={isDarkMode ? { color: 'white' } : { color: 'black' }}>{name} {surname}</TextInput>
                     <View style={styles.linea}></View>
-                    <Text style={isDarkMode ? {color:'white'} : {color:'black'}}>Descripcion</Text>
-                    <TextInput style={isDarkMode ? {color:'white'} : {color:'black'}}>Soy un pibe que le gusta el fulbo, incha del barcelona y de river plate (el mas grande que hay)</TextInput>
+                    <Text style={isDarkMode ? { color: 'white' } : { color: 'black' }}>Descripcion</Text>
+                    <TextInput style={isDarkMode ? { color: 'white' } : { color: 'black' }}>{biography}</TextInput>
                     <View style={styles.linea}></View>
                 </View>
             </ScrollView>
@@ -59,9 +84,9 @@ export default function EditProfileScreen({ route }) {
 
 const styles = StyleSheet.create({
     //Light theme
-    contenedor:{
-        backgroundColor:'white', 
-        height:'100%'
+    contenedor: {
+        backgroundColor: 'white',
+        height: '100%'
     },
     banner: {
         height: 150,
@@ -107,9 +132,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     //Dark theme
-    contenedorDark:{
-        backgroundColor:'#131F2B', 
-        height:'100%'
+    contenedorDark: {
+        backgroundColor: '#131F2B',
+        height: '100%'
     },
     banner: {
         height: 150,

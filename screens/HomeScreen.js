@@ -1,13 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, TextInput } from 'react-native';
 import Modal from "react-native-modal";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { startPostNote, startUploadUserNotes } from '../redux/notes.slice'
+import { useForm } from "../hooks/useForm";
 
 const HomeScreen = ({ navigation }) => {
+  const dispatch = useDispatch()
+  const [message, setMessage] = useState("");
+  const { _id } = useSelector(state => state.user)
 
   const [users, setUsers] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
   const {isDarkMode} = useSelector( state => state.themeMode);
+
+  const [Counter, setCounter] = useState(0)
+
+  const MAX_CHARACTERS = 250;
+
+  useEffect(() => {
+    setCounter(MAX_CHARACTERS - message.length)
+    console.log(Counter)
+  }, [message])
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible);
@@ -25,6 +39,23 @@ const HomeScreen = ({ navigation }) => {
     const user = users.find(item => item.id === id);
     navigation.navigate('ProfileUser', { user: user });
   };
+
+  const handlePostNote = () =>{
+    if (message.length > 250) {
+      return alert("Se permite un maximo de 250 caracteres")
+    }
+    if (message.replace(/\s+/g, '').length === 0) {
+      return alert("El mensaje no puede estar vacio")
+    }
+    const payload = {
+      message,
+    }
+    dispatch(startPostNote(payload))
+    setTimeout(() => {
+      dispatch(startUploadUserNotes(_id, 1))
+    }, 60);
+    toggleModal();
+  }
 
   const renderPost = ({ item }) => {
     return (
@@ -45,6 +76,8 @@ const HomeScreen = ({ navigation }) => {
       </>
     );
   };
+
+  
 
   return (
 
@@ -73,9 +106,9 @@ const HomeScreen = ({ navigation }) => {
                 </TouchableOpacity>
               </View>
             </View>
-            <TextInput style={{ color: isDarkMode ? 'white':'black', paddingBottom: 50, marginTop: 10}} multiline={true} placeholder="¿En que estas pensando?" placeholderTextColor= "gray"/>
-            <TouchableOpacity style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#1DA1F2', paddingVertical: 10, borderRadius: 9, elevation: 2 }}>
-              <Text style={{ color: 'white' }}>Enviar</Text>
+            <TextInput name='message'   onChangeText={(e) => {setMessage(e)}} style={{ color: isDarkMode ? 'white':'black', paddingBottom: 50, marginTop: 10}} multiline={true} placeholder="¿En que estas pensando?" placeholderTextColor= "gray"/>
+            <TouchableOpacity onPress={handlePostNote} style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#1DA1F2', paddingVertical: 10, borderRadius: 9, elevation: 2 }}>
+              <Text onPress={handlePostNote} style={{ color: 'white' }}>Enviar</Text>
             </TouchableOpacity>
           </View>
         </Modal>
