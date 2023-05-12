@@ -6,6 +6,12 @@ import { startUploadUserNotes } from "../redux/notes.slice";
 
 
 export default function ProfileScreen({ navigation }) {
+
+  const ip = "192.168.1.16"
+
+  const {_id } = useSelector(state => state.user)
+  const { isDarkMode } = useSelector(state => state.themeMode);
+  const {userNotes} = useSelector( state => state.notes)
   const dispatch = useDispatch()
   dispatch(startUploadUserNotes(_id,1))
 
@@ -15,30 +21,30 @@ export default function ProfileScreen({ navigation }) {
     biography,
     location,
     birthDate,
+    avatar,
+    banner
   } = useSelector(state => state.ProfileActive);
 
-  const {_id } = useSelector(state => state.user)
-  const { isDarkMode } = useSelector(state => state.themeMode);
-  const {userNotes} = useSelector( state => state.notes)
+ 
   return (
     <View style={isDarkMode ? styles.contenedorDark : styles.contenedor}>
       <ScrollView>
         <Image
           style={styles.banner}
           source={{
-            uri: `http://192.168.0.111:8080/getBanner?id=${_id}`,
+            uri: `http://${ip}:8080/getBanner?id=${_id}`,
           }}
         />
         <View style={styles.contenedorLogo}>
           <Image
             style={styles.LogoPerfil}
             source={{
-              uri: `http://192.168.0.111:8080/getAvatar?id=${_id}`,
+              uri: `http://${ip}:8080/getAvatar?id=${_id}`,
 
             }}
           />
           <View style={{ position: 'absolute', top: 10, right: 15 }}>
-            <TouchableOpacity onPress={() => { navigation.navigate('EditProfile') }}>
+            <TouchableOpacity onPress={() => { navigation.navigate('Hom') }}>
               <MaterialCommunityIcons name="account-edit" size={28} color={isDarkMode ? "white" : "black"} />
             </TouchableOpacity>
           </View>
@@ -54,7 +60,7 @@ export default function ProfileScreen({ navigation }) {
           <Image
             style={styles.Logo}
             source={{
-              uri: `http://192.168.0.111:8080/getAvatar?id=${_id}`,
+              uri: `http://${ip}:8080/getAvatar?id=${_id}`, 
             }}
           />
           <View>

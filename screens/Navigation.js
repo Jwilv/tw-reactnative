@@ -61,7 +61,7 @@ const handleDark = ()=>{
         }}/>
 
       <Tab.Screen 
-        name="Perfil " 
+        name="Perfil" 
         component={ProfileScreen} 
         options={{
           tabBarLabel: 'Profile',

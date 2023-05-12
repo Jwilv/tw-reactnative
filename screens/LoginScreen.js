@@ -7,7 +7,6 @@ import {
   View,
 } from "react-native";
 import React, { useState, useEffect } from 'react';
-import { useForm } from "../hooks/useForm";
 import { useDispatch } from "react-redux";
 import { startLogin } from "../redux/auth.slice";
 import { startUserData } from "../redux/user.slice";
@@ -32,8 +31,8 @@ export default function LoginScreen({ navigation }) {
     console.log("EL id es" + _id)
     dispatch(startUserData())
     dispatch(startDataProfile(_id))
-    dispatch(startUploadUserNotes(_id,1))
-    navigation.navigate('Hom')
+    dispatch(startUploadUserNotes(_id,1));
+    navigation.navigate("Hom")
 
   }
 

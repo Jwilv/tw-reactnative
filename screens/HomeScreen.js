@@ -3,11 +3,26 @@ import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, TextInput } 
 import Modal from "react-native-modal";
 import { useSelector, useDispatch } from 'react-redux';
 import { startPostNote, startUploadUserNotes } from '../redux/notes.slice'
+import { useForm } from "../hooks/useForm";
+import { ScrollView } from 'react-native-gesture-handler';
 
 const HomeScreen = ({ navigation }) => {
   const dispatch = useDispatch()
+  const {userNotes} = useSelector( state => state.notes)
+  dispatch(startUploadUserNotes(_id,1))
   const [message, setMessage] = useState("");
   const { _id } = useSelector(state => state.user)
+  const ip = "192.168.1.16"
+
+  const {
+    name,
+    surname,
+    biography,
+    location,
+    birthDate,
+    avatar,
+    banner
+  } = useSelector(state => state.ProfileActive);
 
   const [users, setUsers] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
@@ -25,13 +40,13 @@ const HomeScreen = ({ navigation }) => {
     setModalVisible(!isModalVisible);
   };
 
-  useEffect(() => {
-    fetch('https://randomuser.me/api/?results=20')
-      .then(response => response.json())
-      .then(data => {
-        setUsers(data.results);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch('https://randomuser.me/api/?results=20')
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       setUsers(data.results);
+  //     });
+  // }, []);
 
   const handlePostPress = id => {
     const user = users.find(item => item.id === id);
@@ -59,7 +74,7 @@ const HomeScreen = ({ navigation }) => {
     return (
       <>
         
-        <TouchableOpacity activeOpacity={1} onPress={() => handlePostPress(item.id)}>
+        {/* <TouchableOpacity activeOpacity={1} onPress={() => handlePostPress(item.id)}>
           <View style={ isDarkMode ? styles.contenedorDark : styles.contenedor}>
             <Image
               style={styles.Logo}
@@ -70,7 +85,7 @@ const HomeScreen = ({ navigation }) => {
               <Text style={isDarkMode ? styles.publicacionDark :styles.publicacion}>Es un hecho establecido hace demasiado tiempo que un lector se distraerá con el contenido del texto de un sitio mientras que mira su diseño. El punto de usar Lorem Ipsum es que tie.</Text>
             </View>
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </>
     );
   };
@@ -78,13 +93,31 @@ const HomeScreen = ({ navigation }) => {
   
 
   return (
+    <ScrollView>
 
     <View style={{height:'100%'}}>
-      <FlatList
+      {/* <FlatList
         data={users}
         renderItem={renderPost}
         keyExtractor={(item, index) => index.toString()}
-      />
+      /> */}
+
+{userNotes.map((publicacion) => {
+          return (
+        <View style={styles.contenedorPublicacion} key={publicacion._id}>
+          <Image
+            style={styles.Logo}
+            source={{
+              uri: `http://${ip}:8080/getAvatar?id=${_id}`, 
+            }}
+          />
+          <View>
+            <Text style={isDarkMode ? styles.nombreDark : styles.nombre}>{name} {surname}</Text>
+            <Text style={isDarkMode ? styles.publicacionDark : styles.publicacion}>{publicacion.message}</Text>
+          </View>
+        </View>
+         );
+        })}
       <TouchableOpacity
         style={styles.floatingButton}
         onPress={toggleModal}
@@ -112,6 +145,7 @@ const HomeScreen = ({ navigation }) => {
         </Modal>
       </View>
     </View>
+    </ScrollView>
   );
 };
 
