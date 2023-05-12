@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import { useForm } from "../hooks/useForm";
 import { useDispatch } from "react-redux";
 import { startLogin } from "../redux/auth.slice";
@@ -17,24 +17,19 @@ import { getUidAndName } from "../helpers/getUidAndName";
 
 
 export default function LoginScreen({ navigation }) {
+
+  const [email, setEmail] = useState("test.com");
+  const [password, setPassword] = useState("123456");
   
 
 
   const dispatch = useDispatch()
 
-
-
-
-  const initialState = {
-    email: "test.com",
-    password: "123456",
-  }
-  const [values, changeForm, reset] = useForm(initialState)
-  const { email, password } = values
   const handleSubmit = async () => {
-    const {_id} = await getUidAndName();
     const data = { email, password }
     dispatch(startLogin(data));
+    const {_id} = await getUidAndName();
+    console.log("EL id es" + _id)
     dispatch(startUserData())
     dispatch(startDataProfile(_id))
     dispatch(startUploadUserNotes(_id,1))
@@ -78,9 +73,8 @@ export default function LoginScreen({ navigation }) {
             marginVertical: 30,
           }}
         >
-          <TextInput style={styles.input} placeholder="Email" name="email" value={email}
-            onChange={changeForm} />
-          <TextInput style={styles.input} placeholder="Password" name="password" value={password} onChange={changeForm} />
+          <TextInput style={styles.input} placeholder="Email" name="email" value={email} onChangeText={(e) => {setEmail(e)}}/>
+          <TextInput style={styles.input} placeholder="Password" name="password" value={password} onChangeText={(e) => {setPassword(e)}} />
         </View>
 
         <View>

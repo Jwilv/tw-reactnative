@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity, TextInput } 
 import Modal from "react-native-modal";
 import { useSelector, useDispatch } from 'react-redux';
 import { startPostNote, startUploadUserNotes } from '../redux/notes.slice'
-import { useForm } from "../hooks/useForm";
 
 const HomeScreen = ({ navigation }) => {
   const dispatch = useDispatch()
@@ -20,7 +19,6 @@ const HomeScreen = ({ navigation }) => {
 
   useEffect(() => {
     setCounter(MAX_CHARACTERS - message.length)
-    console.log(Counter)
   }, [message])
 
   const toggleModal = () => {
