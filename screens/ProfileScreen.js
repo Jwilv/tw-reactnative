@@ -7,7 +7,7 @@ import { startUploadUserNotes } from "../redux/notes.slice";
 
 export default function ProfileScreen({ navigation }) {
 
-  const ip = "192.168.1.16"
+  const ip = "192.168.0.111"
 
   const {_id } = useSelector(state => state.user)
   const { isDarkMode } = useSelector(state => state.themeMode);
@@ -44,7 +44,7 @@ export default function ProfileScreen({ navigation }) {
             }}
           />
           <View style={{ position: 'absolute', top: 10, right: 15 }}>
-            <TouchableOpacity onPress={() => { navigation.navigate('Hom') }}>
+            <TouchableOpacity onPress={() => { navigation.navigate('EditProfile') }}>
               <MaterialCommunityIcons name="account-edit" size={28} color={isDarkMode ? "white" : "black"} />
             </TouchableOpacity>
           </View>

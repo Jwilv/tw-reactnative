@@ -8,11 +8,11 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 const HomeScreen = ({ navigation }) => {
   const dispatch = useDispatch()
-  const {userNotes} = useSelector( state => state.notes)
-  dispatch(startUploadUserNotes(_id,1))
+  const { userNotes } = useSelector(state => state.notes)
+  dispatch(startUploadUserNotes(_id, 1))
   const [message, setMessage] = useState("");
   const { _id } = useSelector(state => state.user)
-  const ip = "192.168.1.16"
+  const ip = "192.168.0.111"
 
   const {
     name,
@@ -26,7 +26,7 @@ const HomeScreen = ({ navigation }) => {
 
   const [users, setUsers] = useState([]);
   const [isModalVisible, setModalVisible] = useState(false);
-  const {isDarkMode} = useSelector( state => state.themeMode);
+  const { isDarkMode } = useSelector(state => state.themeMode);
 
   const [Counter, setCounter] = useState(0)
 
@@ -53,7 +53,7 @@ const HomeScreen = ({ navigation }) => {
     navigation.navigate('ProfileUser', { user: user });
   };
 
-  const handlePostNote = () =>{
+  const handlePostNote = () => {
     if (message.length > 250) {
       return alert("Se permite un maximo de 250 caracteres")
     }
@@ -73,7 +73,7 @@ const HomeScreen = ({ navigation }) => {
   const renderPost = ({ item }) => {
     return (
       <>
-        
+
         {/* <TouchableOpacity activeOpacity={1} onPress={() => handlePostPress(item.id)}>
           <View style={ isDarkMode ? styles.contenedorDark : styles.contenedor}>
             <Image
@@ -90,62 +90,62 @@ const HomeScreen = ({ navigation }) => {
     );
   };
 
-  
+
 
   return (
-    <ScrollView>
+    
 
-    <View style={{height:'100%'}}>
-      {/* <FlatList
+      <View style={{ height: '100%' }}>
+        {/* <FlatList
         data={users}
         renderItem={renderPost}
         keyExtractor={(item, index) => index.toString()}
       /> */}
-
-{userNotes.map((publicacion) => {
+      <ScrollView>
+        {userNotes.map((publicacion) => {
           return (
-        <View style={styles.contenedorPublicacion} key={publicacion._id}>
-          <Image
-            style={styles.Logo}
-            source={{
-              uri: `http://${ip}:8080/getAvatar?id=${_id}`, 
-            }}
-          />
-          <View>
-            <Text style={isDarkMode ? styles.nombreDark : styles.nombre}>{name} {surname}</Text>
-            <Text style={isDarkMode ? styles.publicacionDark : styles.publicacion}>{publicacion.message}</Text>
-          </View>
-        </View>
-         );
-        })}
-      <TouchableOpacity
-        style={styles.floatingButton}
-        onPress={toggleModal}
-      >
-        <Text style={styles.buttonText}>+</Text>
-      </TouchableOpacity>
-      <View style={{ flex: 1 }}>
-        <Modal isVisible={isModalVisible}>
-          <View style={{ backgroundColor: isDarkMode ? '#131F2B' : '#FFFF', paddingVertical: 20, paddingHorizontal: 20, borderRadius: 6 }}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Image style={{ width: 50, height: 50, borderRadius: 100 }} source={{ uri: 'https://cdn.pixabay.com/photo/2016/08/03/09/04/universe-1566161_640.jpg' }} />
-              <Text style={{ color: isDarkMode ? 'white':'black' , marginLeft: 10, alignSelf: 'center' }}>Matias Rolon</Text>
-              <View style={{ flex: 1 }}></View>
-              <View style={{ position: 'absolute', top: -5, right: 1 }}>
-                <TouchableOpacity onPress={toggleModal}>
-                  <Text style={{ color: isDarkMode ? 'white':'black', fontSize: 20 }}>x</Text>
-                </TouchableOpacity>
+            <View style={ isDarkMode ? styles.contenedorDark : styles.contenedor} key={publicacion._id}>
+              <Image
+                style={styles.Logo}
+                source={{
+                  uri: `http://${ip}:8080/getAvatar?id=${_id}`,
+                }}
+              />
+              <View>
+                <Text style={ isDarkMode ? styles.nombreDark : styles.nombre}>{name} {surname}</Text>
+                <Text style={isDarkMode ? styles.publicacionDark :styles.publicacion}>{publicacion.message}</Text>
               </View>
             </View>
-            <TextInput name='message'   onChangeText={(e) => {setMessage(e)}} style={{ color: isDarkMode ? 'white':'black', paddingBottom: 50, marginTop: 10}} multiline={true} placeholder="¿En que estas pensando?" placeholderTextColor= "gray"/>
-            <TouchableOpacity onPress={handlePostNote} style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#1DA1F2', paddingVertical: 10, borderRadius: 9, elevation: 2 }}>
-              <Text onPress={handlePostNote} style={{ color: 'white' }}>Enviar</Text>
-            </TouchableOpacity>
-          </View>
-        </Modal>
+          );
+        })}
+        </ScrollView>
+        <TouchableOpacity
+          style={styles.floatingButton}
+          onPress={toggleModal}
+        >
+          <Text style={styles.buttonText}>+</Text>
+        </TouchableOpacity>
+        <View style={{ flex: 1 }}>
+          <Modal isVisible={isModalVisible}>
+            <View style={{ backgroundColor: isDarkMode ? '#131F2B' : '#FFFF', paddingVertical: 20, paddingHorizontal: 20, borderRadius: 6 }}>
+              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Image style={{ width: 50, height: 50, borderRadius: 100 }} source={{ uri: 'https://cdn.pixabay.com/photo/2016/08/03/09/04/universe-1566161_640.jpg' }} />
+                <Text style={{ color: isDarkMode ? 'white' : 'black', marginLeft: 10, alignSelf: 'center' }}>Matias Rolon</Text>
+                <View style={{ flex: 1 }}></View>
+                <View style={{ position: 'absolute', top: -5, right: 1 }}>
+                  <TouchableOpacity onPress={toggleModal}>
+                    <Text style={{ color: isDarkMode ? 'white' : 'black', fontSize: 20 }}>x</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+              <TextInput name='message' onChangeText={(e) => { setMessage(e) }} style={{ color: isDarkMode ? 'white' : 'black', paddingBottom: 50, marginTop: 10 }} multiline={true} placeholder="¿En que estas pensando?" placeholderTextColor="gray" />
+              <TouchableOpacity onPress={handlePostNote} style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#1DA1F2', paddingVertical: 10, borderRadius: 9, elevation: 2 }}>
+                <Text onPress={handlePostNote} style={{ color: 'white' }}>Enviar</Text>
+              </TouchableOpacity>
+            </View>
+          </Modal>
+        </View>
       </View>
-    </View>
-    </ScrollView>
   );
 };
 
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
     right: 20,
     width: 50,
     height: 50,
-    backgroundColor:'#1DA1F2',
+    backgroundColor: '#1DA1F2',
 
     borderRadius: 100,
     alignItems: 'center',
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
     right: 20,
     width: 50,
     height: 50,
-    backgroundColor:'#1DA1F2',
+    backgroundColor: '#1DA1F2',
 
     borderRadius: 100,
     alignItems: 'center',

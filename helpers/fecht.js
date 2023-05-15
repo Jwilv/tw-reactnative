@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // const baseUrl = import.meta.env.VITE_APP_URL_API
-const baseUrl = 'http://192.168.1.16:8080'
+const baseUrl = 'http:/192.168.0.111:8080'
 
 
 export const fetchWithoToken = async (endpoint, data, method = "GET") => {
@@ -48,4 +48,24 @@ export const fetchToken = async (endpoint, data, method = "GET") => {
         return await resp.json()
     }
 
+}
+
+export const fetchTokenUploadFile = async (endpoint, data, name) => {
+    const url = `${baseUrl}/${endpoint}`
+    const token = localStorage.getItem('token')
+
+    const formData = new FormData();
+    formData.append(name, data);
+
+    const resp = await fetch(url, {
+        method: 'POST',
+        headers: {
+            "x-token": token
+        },
+        body: formData
+    })
+        .then(() => { return Swal.fire("acept","actualizacion correcta","success")})
+        .catch((err) => {
+            return Swal.fire("Error",err,"error")
+        })
 }

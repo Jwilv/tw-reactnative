@@ -27,7 +27,7 @@ export default function EditProfileScreen({ route }) {
             headerShown: true,
             title: 'Editar perfil',
             headerRight: () => (
-                <TouchableOpacity onPress={() => { navigation.navigate('Profile') }}><MaterialCommunityIcons name="check" size={24} color={isDarkMode ? '#1DA1F2' : 'blue'} /></TouchableOpacity>
+                <TouchableOpacity onPress={() => { navigation.navigate('Hom') }}><MaterialCommunityIcons name="check" size={24} color={isDarkMode ? '#1DA1F2' : 'blue'} /></TouchableOpacity>
             ),
         });
     }, [navigation]);
@@ -40,10 +40,12 @@ export default function EditProfileScreen({ route }) {
             return
         }
         const picker = await ImagePicker.launchImageLibraryAsync()
-        if(picker.cancelled === true){
+        if (picker.canceled === true) {
+            alert("Seleccione una imagen")
             return;
         }
-        setSelectedImage({localUri: picker.uri})
+        console.log(picker)
+        // setSelectedImage({localUri: picker.uri})
     }
 
     return (
