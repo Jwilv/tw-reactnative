@@ -52,10 +52,11 @@ export const fetchToken = async (endpoint, data, method = "GET") => {
 
 export const fetchTokenUploadFile = async (endpoint, data, name) => {
     const url = `${baseUrl}/${endpoint}`
-    const token = localStorage.getItem('token')
+    const token = await AsyncStorage.getItem('token');
 
     const formData = new FormData();
     formData.append(name, data);
+    console.log(formData)
 
     const resp = await fetch(url, {
         method: 'POST',
@@ -64,8 +65,8 @@ export const fetchTokenUploadFile = async (endpoint, data, name) => {
         },
         body: formData
     })
-        .then(() => { return Swal.fire("acept","actualizacion correcta","success")})
+        .then(() => { alert("Salio bien")})
         .catch((err) => {
-            return Swal.fire("Error",err,"error")
+            return alert(err);
         })
 }

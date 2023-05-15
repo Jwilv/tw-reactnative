@@ -5,6 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import * as ImagePicker from 'expo-image-picker';
+import { fetchTokenUploadFile } from "../helpers/fecht";
 
 export default function EditProfileScreen({ route }) {
     const {
@@ -45,7 +46,9 @@ export default function EditProfileScreen({ route }) {
             return;
         }
         console.log(picker)
-        // setSelectedImage({localUri: picker.uri})
+        setSelectedImage(picker)
+        await fetchTokenUploadFile('updateBanner',picker,'banner');
+
     }
 
     return (
